@@ -1,6 +1,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import axios, { RawAxiosRequestConfig } from 'axios';
 import i18n from '~/services/i18n';
+import { storage } from '~/services/storage';
 
 export const apiClient = new QueryClient({
   defaultOptions: {
@@ -20,6 +21,7 @@ const createHttpClient = () => {
       'Content-Type': 'application/json',
       'Accept-Language': i18n.locale,
       Authorization: process.env.EXPO_PUBLIC_AUTH,
+      AuthToken: storage.getString('authToken'),
     },
   });
 };
